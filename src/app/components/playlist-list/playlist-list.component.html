@@ -1,0 +1,32 @@
+<!-- playlist-list.component.html -->
+
+<div>
+    <h2>Playlists</h2>
+    <div *ngFor="let playlist of playlists">
+      <h3>{{ playlist.nome }}</h3>
+      <p>{{ playlist.descricao }}</p>
+  
+      <button (click)="deletePlaylist(playlist.id)">Deletar Playlist</button>
+  
+      <div>
+        <h4>Adicionar Música</h4>
+        <label for="titulo">Título:</label>
+        <input [(ngModel)]="newMusic.titulo" id="titulo" name="titulo" />
+  
+        <label for="artista">Artista:</label>
+        <input [(ngModel)]="newMusic.artista" id="artista" name="artista" />
+  
+        <label for="album">Álbum:</label>
+        <input [(ngModel)]="newMusic.album" id="album" name="album" />
+  
+        <label for="ano">Ano:</label>
+        <input [(ngModel)]="newMusic.ano" id="ano" name="ano" />
+  
+        <label for="genero">Gênero:</label>
+        <input [(ngModel)]="newMusic.genero" id="genero" name="genero" />
+  
+        <button (click)="addMusicToPlaylist()">Adicionar Música</button>
+      </div>
+    </div>
+  </div>
+  
