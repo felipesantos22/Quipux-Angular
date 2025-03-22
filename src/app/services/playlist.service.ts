@@ -23,7 +23,7 @@ export interface Music {
   providedIn: 'root',
 })
 export class PlaylistService {
-  private apiUrl = 'http://localhost:8080/playlists'; // Sua URL da API
+  private apiUrl = 'api/playlists';
 
   constructor(private http: HttpClient) {}
 
