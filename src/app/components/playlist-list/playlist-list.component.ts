@@ -1,7 +1,7 @@
 // playlist-list.component.ts
 
 import { Component, OnInit } from '@angular/core';
-import { PlaylistService, Playlist, Music } from '../../services/playlist.service';
+import { PlaylistService} from '../../services/playlist.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
@@ -12,36 +12,38 @@ import { CommonModule } from '@angular/common';
   styleUrl: './playlist-list.component.css'
 })
 export class PlaylistListComponent implements OnInit {
-  playlists: Playlist[] = [];
-  newMusic: Music = { titulo: '', artista: '', album: '', ano: '', genero: '' }; // Formulário para nova música
-  selectedPlaylistId: number | null = null; // ID da playlist selecionada
+  playlists: any[] = [];
+  newPlaylist = { nome: '', descricao: '' };
+  newMusic = { titulo: '', artista: '', playlistId: null };
 
   constructor(private playlistService: PlaylistService) {}
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.loadPlaylists();
   }
 
+  // Criar Playlist
+  createPlaylist() {
+    this.playlistService.createPlaylist(this.newPlaylist.nome, this.newPlaylist.descricao)
+      .subscribe(() => {
+        this.loadPlaylists();
+        this.newPlaylist = { nome: '', descricao: '' };
+      });
+  }
+
+  // Adicionar Música a uma Playlist
+  addMusic() {
+    this.playlistService.addMusicToPlaylist(this.newMusic.playlistId!, this.newMusic.titulo, this.newMusic.artista)
+      .subscribe(() => {
+        this.loadPlaylists();
+        this.newMusic = { titulo: '', artista: '', playlistId: null };
+      });
+  }
+
+  // Carregar Playlists
   loadPlaylists() {
-    this.playlistService.getPlaylists().subscribe((data) => {
+    this.playlistService.getPlaylists().subscribe(data => {
       this.playlists = data;
     });
-  }
-
-  deletePlaylist(id: number) {
-    this.playlistService.deletePlaylist(id).subscribe(() => {
-      this.playlists = this.playlists.filter((p) => p.id !== id);
-    });
-  }
-
-  addMusicToPlaylist() {
-    if (this.selectedPlaylistId && this.newMusic) {
-      this.playlistService.addMusicToPlaylist(this.selectedPlaylistId, this.newMusic).subscribe((updatedPlaylist) => {
-        const playlistIndex = this.playlists.findIndex((p) => p.id === updatedPlaylist.id);
-        if (playlistIndex > -1) {
-          this.playlists[playlistIndex] = updatedPlaylist;
-        }
-      });
-    }
   }
 }

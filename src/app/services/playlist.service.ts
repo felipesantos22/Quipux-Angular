@@ -1,44 +1,33 @@
-// playlist.service.ts
-
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
-export interface Playlist {
-  id: number;
-  nome: string;
-  descricao: string;
-  musicas: Music[];
-}
-
-export interface Music {
-  titulo: string;
-  artista: string;
-  album: string;
-  ano: string;
-  genero: string;
-}
 
 @Injectable({
   providedIn: 'root',
 })
 export class PlaylistService {
-  private apiUrl = 'api/playlists';
+  private apiUrl = '/api'; 
 
   constructor(private http: HttpClient) {}
 
-  // Método para obter todas as playlists
-  getPlaylists(): Observable<Playlist[]> {
-    return this.http.get<Playlist[]>(this.apiUrl);
+  // Criar Playlist
+  createPlaylist(nome: string, descricao: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/playlists`, { nome, descricao });
   }
 
-  // Método para excluir uma playlist
-  deletePlaylist(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  // Adicionar Música a uma Playlist
+  addMusicToPlaylist(playlistId: number, titulo: string, artista: string): Observable<any> {
+    const url = `${this.apiUrl}/musics/${playlistId}/add`; // Ajuste da URL
+    return this.http.post(url, { titulo, artista });
+  }
+  
+  // Listar todas as Playlists
+  getPlaylists(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/playlists`);
   }
 
-  // Método para adicionar música a uma playlist
-  addMusicToPlaylist(playlistId: number, music: Music): Observable<Playlist> {
-    return this.http.post<Playlist>(`${this.apiUrl}/${playlistId}/musicas`, music);
+  // Listar músicas de uma Playlist
+  getMusicsByPlaylist(playlistId: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}/playlists/${playlistId}/musics`);
   }
 }

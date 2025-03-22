@@ -1,32 +1,29 @@
-<!-- playlist-list.component.html -->
+<h1>Gerenciar Playlists</h1>
 
-<div>
-    <h2>Lista de Músicas</h2>
-    <div *ngFor="let playlist of playlists">
-      <h3>{{ playlist.nome }}</h3>
-      <p>{{ playlist.descricao }}</p>
+<!-- Criar Playlist -->
+<input [(ngModel)]="newPlaylist.nome" placeholder="Nome da Playlist">
+<input [(ngModel)]="newPlaylist.descricao" placeholder="Descrição">
+<button (click)="createPlaylist()">Criar Playlist</button>
+
+<hr>
+
+<!-- Adicionar Música -->
+<select [(ngModel)]="newMusic.playlistId">
+  <option *ngFor="let p of playlists" [value]="p.id">{{ p.nome }}</option>
+</select>
+<input [(ngModel)]="newMusic.titulo" placeholder="Título da Música">
+<input [(ngModel)]="newMusic.artista" placeholder="Artista">
+<button (click)="addMusic()">Adicionar Música</button>
+
+<hr>
+
+<!-- Listar Playlists -->
+<div *ngFor="let playlist of playlists">
+  <h3>{{ playlist.nome }} ({{ playlist.descricao }})</h3>
   
-      <button (click)="deletePlaylist(playlist.id)">Deletar Playlist</button>
-  
-      <div>
-        <h4>Adicionar Música</h4>
-        <label for="titulo">Título:</label>
-        <input [(ngModel)]="newMusic.titulo" id="titulo" name="titulo" />
-  
-        <label for="artista">Artista:</label>
-        <input [(ngModel)]="newMusic.artista" id="artista" name="artista" />
-  
-        <label for="album">Álbum:</label>
-        <input [(ngModel)]="newMusic.album" id="album" name="album" />
-  
-        <label for="ano">Ano:</label>
-        <input [(ngModel)]="newMusic.ano" id="ano" name="ano" />
-  
-        <label for="genero">Gênero:</label>
-        <input [(ngModel)]="newMusic.genero" id="genero" name="genero" />
-  
-        <button (click)="addMusicToPlaylist()">Adicionar Música</button>
-      </div>
-    </div>
-  </div>
-  
+  <ul>
+    <li *ngFor="let music of playlist.musicas">
+      {{ music.titulo }} - {{ music.artista }}
+    </li>
+  </ul>
+</div>
