@@ -46,4 +46,18 @@ export class PlaylistListComponent implements OnInit {
       this.playlists = data;
     });
   }
+
+  deleteMusic(idMusic: number): void {
+    this.playlistService.deleleMusic(idMusic).subscribe(
+      response => {
+        console.log('Música deletada com sucesso', response);
+        // this.loadMusics(); // Carregar novamente a lista de músicas ou outras ações
+      },
+      error => {
+        console.error('Erro ao deletar música', error);
+      }
+    );
+  }
+  
+
 }

@@ -1,4 +1,4 @@
-<h1>Gerenciar Playlists</h1>
+<h1>Gerenciar Lista de Músicas</h1>
 
 <!-- Criar Playlist -->
 <input [(ngModel)]="newPlaylist.nome" placeholder="Nome da Playlist">
@@ -15,6 +15,7 @@
 <input [(ngModel)]="newMusic.artista" placeholder="Artista">
 <button (click)="addMusic()">Adicionar Música</button>
 
+
 <hr>
 
 <!-- Listar Playlists -->
@@ -24,6 +25,8 @@
   <ul>
     <li *ngFor="let music of playlist.musicas">
       {{ music.titulo }} - {{ music.artista }}
+      <!-- Botão para deletar música passando o id da música -->
+      <button (click)="deleteMusic(music.id)">Deletar Música</button>
     </li>
   </ul>
 </div>
