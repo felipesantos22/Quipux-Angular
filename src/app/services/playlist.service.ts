@@ -31,8 +31,17 @@ export class PlaylistService {
     return this.http.get(`${this.apiUrl}/playlists/${playlistId}/musics`);
   }
 
+   // Listar todas as Playlists
+   getMusics(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/musics`);
+  }
+
   deleleMusic(idMusic: number): Observable<any>{
     return this.http.delete(`${this.apiUrl}/musics/${idMusic}`);
+  }
+
+  delelePlaylist(id: number): Observable<any>{
+    return this.http.delete(`${this.apiUrl}/playlists/${id}`);
   }
 
 

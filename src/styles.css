@@ -1,86 +1,140 @@
-/* playlist-list.component.css */
+/* Estilo global do body */
+body {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  background-color: #121212;
+  color: #fff;
+}
 
-/* Estilo do título */
+/* Estilo do título principal */
 h1 {
-    text-align: center;
-    margin-top: 20px;
-    color: #1be68e; /* Cor laranja */
-    font-size: 24px;
-    font-weight: bold;
-  }
-  
-  /* Estilo dos inputs */
-  input {
-    display: block;
-    margin: 10px auto;
-    padding: 10px;
-    width: 80%;
-    max-width: 400px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 16px;
-  }
-  
-  /* Estilo do botão */
-  button {
-    display: block;
-    margin: 10px auto;
-    padding: 10px 20px;
-    background-color: #1be68e;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  button:hover {
-    background-color: #e55b12;
-  }
-  
-  /* Estilo do container das playlists */
-  div {
-    margin-top: 30px;
-    text-align: center;
-  }
-  
-  /* Estilo das playlists */
-  h3 {
-    color: #333;
+  text-align: center;
+  margin-top: 20px;
+  color: #1be68e;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+/* Estilo dos inputs e selects */
+input, select {
+  display: block;
+  margin: 10px auto;
+  padding: 10px;
+  width: 80%;
+  max-width: 400px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: #1e1e1e;
+  color: #fff;
+}
+
+/* Estilo para todos os botões */
+button {
+  display: block;
+  margin: 10px auto;
+  padding: 10px 20px;
+  background-color: #1be68e;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #e55b12;
+}
+
+/* Container das playlists */
+.playlist-container {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #1e1e1e;
+  border-radius: 6px;
+}
+
+/* Cabeçalho da playlist (nome e botão deletar) */
+.playlist-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Lista de músicas dentro da playlist */
+.music-list {
+  list-style-type: none;
+  padding-left: 0;
+  margin-top: 10px;
+}
+
+/* Alinhamento das músicas */
+.music-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 5px 0;
+  padding: 8px;
+  background-color: #252525;
+  border-radius: 4px;
+}
+
+/* Estilo do nome da música */
+.music-title {
+  font-size: 16px;
+  color: #fff;
+}
+
+/* Botão de delete */
+.delete-button {
+  padding: 5px 10px;
+  font-size: 12px;
+  background-color: #e55b12;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-left: auto; /* Alinha os botões à direita */
+}
+
+.delete-button:hover {
+  background-color: #b9430d;
+}
+
+/* Botão de delete para música */
+.delete-button-music {
+  font-size: 12px;
+  padding: 5px 10px;
+}
+
+/* Botão de delete para playlist */
+.delete-button-playlist {
+  font-size: 12px;
+  padding: 5px 10px;
+}
+
+/* Responsividade */
+@media (max-width: 600px) {
+  h1 {
     font-size: 20px;
-    margin-bottom: 10px;
   }
-  
-  /* Estilo dos itens da lista de músicas */
-  ul {
-    list-style-type: none;
-    padding-left: 0;
-    margin-top: 10px;
+
+  h3 {
+    font-size: 18px;
   }
-  
-  li {
-    margin: 5px 0;
-    font-size: 16px;
-    color: #555;
+
+  input, select, button {
+    width: 90%;
   }
-  
-  /* Estilo do select */
-  select {
-    display: block;
-    margin: 10px auto;
-    padding: 10px;
-    width: 80%;
-    max-width: 400px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 16px;
+
+  .music-item {
+    flex-direction: row;
   }
-  
-  /* Adicionar um pouco de padding ao body para não ficar colado nas bordas */
-  body {
-    padding: 20px;
-    font-family: Arial, sans-serif;
-    background-color: #121212;
+
+  .delete-button {
+    font-size: 10px;
+    padding: 4px 8px;
   }
-  
+}

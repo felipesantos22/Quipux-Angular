@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { PlaylistService} from '../../services/playlist.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Music } from '../../models/music';
 
 @Component({
   selector: 'app-playlist-list',
@@ -47,17 +48,33 @@ export class PlaylistListComponent implements OnInit {
     });
   }
 
-  deleteMusic(idMusic: number): void {
-    this.playlistService.deleleMusic(idMusic).subscribe(
-      response => {
-        console.log('Música deletada com sucesso', response);
-        // this.loadMusics(); // Carregar novamente a lista de músicas ou outras ações
-      },
-      error => {
-        console.error('Erro ao deletar música', error);
-      }
-    );
+  loadMusics(){
+    this.playlistService.getMusics().subscribe(data => {
+      this.playlists = data;
+    });
+  }
+
+  deletePlaylist(playlistId: number) {
+    this.playlistService.delelePlaylist(playlistId).subscribe(() => {
+      // Remove a playlist da lista local
+      this.playlists = this.playlists.filter(playlist => playlist.id !== playlistId);
+    });
+  }
+
+  /* deleteMusic(musicId: number) {
+    this.playlistService.deleleMusic(musicId).subscribe(() => {
+      // Remover a música da lista da playlist
+      this.playlists.forEach(playlist => {
+        playlist.musicas = playlist.musicas.filter((music: Music) => music.id !== musicId);
+      });
+    });
+  } */
+
+  deleteMusic(musicId: number) {
+    this.playlistService.deleleMusic(musicId).subscribe(() => {
+      // Recarrega as playlists e suas músicas do servidor
+      this.loadPlaylists();
+    });
   }
   
-
 }
